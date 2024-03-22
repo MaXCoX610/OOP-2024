@@ -1,3 +1,5 @@
+#ifndef NUMBERLIST_H
+#define MATH_H
 #include <iostream>
 #include <stdio.h>
 class NumberList
@@ -12,3 +14,4 @@ public:
     void Sort();          // will sort the numbers vector
     void Print();         // will print the current vector
 };
+#endif
