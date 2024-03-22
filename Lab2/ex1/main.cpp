@@ -14,4 +14,6 @@ int main(){
     n.Print();
     cout<<'\n';
     n.Sort();
+    n.Print();
+    return 0;
 }
