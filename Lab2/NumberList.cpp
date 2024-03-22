@@ -1,16 +1,18 @@
 #include "NumberList.h"
 using namespace std;
 
-NumberList::NumberList(){} //initialising the constructor
+NumberList::NumberList(){
+    this->Init();
+} //initialising the constructor
 
 void NumberList::Init(){
     this->count=0;
 }
 
 bool NumberList::Add(int x){
-    this->numbers[this->count++]=x;
     if(this->count>=10)
         return false;
+    this->numbers[this->count++]=x; 
 }
 
 void NumberList::Sort(){ ///selection sort
