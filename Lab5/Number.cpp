@@ -68,6 +68,29 @@ void Number::SwitchBase(int newBase) {
 	}
 }
 
+bool Number::operator <(const Number& otherNumber) {
+    return GetBase10Number() < otherNumber.GetBase10Number(); 
+
+}
+
+bool Number::operator >=(const Number& otherNumber) {
+    return GetBase10Number() >= otherNumber.GetBase10Number(); 
+
+}
+
+bool Number::operator <=(const Number& otherNumber) {
+    return GetBase10Number() <= otherNumber.GetBase10Number(); 
+
+}
+
+bool Number::operator >(const Number& otherNumber) {
+    return GetBase10Number() > otherNumber.GetBase10Number();
+}
+
+int Number::operator -(const Number& otherNumber) {
+    return GetBase10Number() - otherNumber.GetBase10Number();
+}
+
 Number::~Number()
 {
 	delete[] sir;

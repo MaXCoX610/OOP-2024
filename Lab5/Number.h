@@ -16,7 +16,11 @@ class Number
 public:
 	Number(const char* value, int base); // where base is between 2 and 16
 	~Number();
-
+	bool operator <(const Number& otherNumber);
+	bool operator <=(const Number& otherNumber);
+	bool operator >=(const Number& otherNumber);
+	bool operator >(const Number& otherNumber);
+	int operator -(const Number& otherNumber);
 	// add operators and copy/move constructor
 	unsigned int GetBase10Number() const;
 	bool operator <(const Number& otherNumber);
