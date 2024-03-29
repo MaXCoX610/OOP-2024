@@ -9,26 +9,30 @@
 
 class Number
 {
-	char* sir;
-	int nrBase;
-	unsigned int sirLen;
-	// add data members
+    char* sir;
+    int nrBase;
+    unsigned int sirLen;
 public:
-	Number(const char* value, int base); // where base is between 2 and 16
-	~Number();
-	bool operator <(const Number& otherNumber);
-	bool operator <=(const Number& otherNumber);
-	bool operator >=(const Number& otherNumber);
-	bool operator >(const Number& otherNumber);
-	int operator -(const Number& otherNumber);
-	// add operators and copy/move constructor
-	unsigned int GetBase10Number() const;
-	bool operator <(const Number& otherNumber);
 
-	void SwitchBase(int newBase);
-	void Print();
-	int  GetDigitsCount(); // returns the number of digits for the current number
-	int  GetBase(); // returns the current base
+    Number(const char* value, int base); 
+    ~Number(); // Destructor
+
+    unsigned int GetBase10Number() const;
+    bool operator <(const Number& otherNumber);
+    bool operator <=(const Number& otherNumber);
+    bool operator >=(const Number& otherNumber);
+    bool operator >(const Number& otherNumber);
+    void operator =(const Number& otherNumber);
+    void operator +=(const Number& otherNumber);
+    void operator -=(const Number& otherNumber);
+
+    friend Number operator-(const Number& nr1, const Number& nr2);
+    friend Number operator+(const Number& nr1, const Number& nr2);
+
+    void SwitchBase(int newBase);
+    void Print();
+    int  GetDigitsCount(); 
+    int  GetBase(); 
 };
 
 
