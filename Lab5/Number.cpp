@@ -55,16 +55,16 @@ int Number::GetBase() {
 
 void Number::SwitchBase(int newBase) {
 	if (nrBase <= 10) {
-		int nr = std::stoi(std::string(sir), nullptr, nrBase); // Convert to decimal
-		std::string result = ""; // Create a string to hold the result
+		int nr = std::stoi(std::string(sir), nullptr, nrBase); 
+		std::string result = ""; 
 		while (nr > 0) {
 			int digit = nr % newBase;
-			result.push_back(digit + '0'); // Convert digit to character and add to result
+			result.push_back(digit + '0'); 
 			nr /= newBase;
 		}
-		std::reverse(result.begin(), result.end()); // Reverse result to get the correct order
-		std::strcpy(sir, result.c_str()); // Copy the result back to sir
-		nrBase = newBase; // Update the base
+		reverse(result.begin(), result.end()); 
+		strcpy(sir, result.c_str()); 
+		nrBase = newBase; 
 	}
 }
 
