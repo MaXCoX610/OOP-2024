@@ -1,9 +1,23 @@
 #include "Circuit.h"
+#include "Car.h"
+
 using namespace std;
+
+void Circuit::SetLength(double length) {
+    this->length = length;
+}
+
+void Circuit::SetWeather(Weather weather) {
+    this->weather = weather;
+}
+
+void Circuit::AddCar(Car* car) {
+    cars.push_back(car);
+}
 
 void Circuit::Race() {
     for (Car* car : cars) {
-        int nr_of_laps = 0;
+        int nr_of_laps = 10;
         while (car->fuel_capacity > 0 && nr_of_laps * length < length) {
             double speed;
             switch (weather) {
@@ -28,16 +42,4 @@ void Circuit::Race() {
         }
         // store the number of laps and whether the car finished the race
     }
-}
-
-void Circuit::SetLength(double length) {
-    this->length = length;
-}
-
-void Circuit::SetWeather(Weather weather) {
-    this->weather = weather;
-}
-
-void Circuit::AddCar(Car* car) {
-    cars.push_back(car);
 }

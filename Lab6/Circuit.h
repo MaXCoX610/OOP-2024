@@ -1,8 +1,9 @@
 #include "Car.h"
-
+#include "Weather.h"
+#ifndef CIRCUIT_H
+#define CIRCUIT_H
 using namespace std;
 
-enum class Weather { Rain, Sunny, Snow };
 
 class Circuit {   
     double length;
@@ -17,3 +18,5 @@ public:
     void ShowFinalRanks();
     void ShowWhoDidNotFinish();
 };
+
+#endif
