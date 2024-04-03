@@ -12,7 +12,8 @@ void NumberList::Init(){
 bool NumberList::Add(int x){
     if(this->count>=10)
         return false;
-    this->numbers[this->count++]=x; 
+    this->numbers[count++]=x; 
+    return true;
 }
 
 void NumberList::Sort(){ ///selection sort
