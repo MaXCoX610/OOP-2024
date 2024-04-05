@@ -1,22 +1,26 @@
 #include "Car.h"
-#include "Weather.h"
-#ifndef CIRCUIT_H
-#define CIRCUIT_H
-using namespace std;
+#include <vector>
+#include <algorithm>
 
+class Circuit{
+private:
+    std::vector<Car*> cars;
 
-class Circuit {   
-    double length;
+    Car* carss[20];
+
+    Car** carsss;
+
+    int nrOfCars;
     Weather weather;
-    vector<Car*> cars;
-
+    double circuitLength;
 public:
-    void SetLength(double length);
-    void SetWeather(Weather weather);
-    void AddCar(Car* car);
+    Circuit();
+    //Circuit(unsigned int nrOfCars);
     void Race();
-    void ShowFinalRanks();
-    void ShowWhoDidNotFinish();
+    void SetWeather(Weather conditon);
+    void SetLength(double length);
+    void AddCar(Car *car);
+    void ShowcaseAll();
+    double getFinishTime(Car *car);
+    //bool compareBySpeed(const Car* a, const Car* b);
 };
-
-#endif

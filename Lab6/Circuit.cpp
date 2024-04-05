@@ -1,45 +1,69 @@
 #include "Circuit.h"
-#include "Car.h"
+Circuit::Circuit() {
+    nrOfCars = 0;
+}
+void Circuit::AddCar(Car *car) {
+    /*cars[nrOfCars] = car;
+    nrOfCars++;*/
 
-using namespace std;
+    carss[nrOfCars] = car;
+    nrOfCars++;
 
+    //cars.push_back(car);
+    
+}
+
+//Circuit::Circuit(unsigned int desiredCars) {
+//    carsss = new Car * [desiredCars];
+//}
+
+void Circuit::SetWeather(Weather condition) {
+    weather = condition;
+    
+}
 void Circuit::SetLength(double length) {
-    this->length = length;
+    circuitLength = length;
 }
 
-void Circuit::SetWeather(Weather weather) {
-    this->weather = weather;
+void Circuit::ShowcaseAll() {
+    std::cout << "The folowing cars are on track today: "<<'\n';
+    /*for (const auto& carPtr : cars) {
+        Car* car = carPtr;
+        car->showcase();
+    }*/
+    
+    for (int i = 0; i < nrOfCars; i++) {
+        carss[i]->showcase();
+    }
 }
 
-void Circuit::AddCar(Car* car) {
-    cars.push_back(car);
+double Circuit::getFinishTime(Car* car) {
+    if (car->calculateRange() < circuitLength)
+        return 0;
+    else {
+        return circuitLength / car->getAverageSpeed(weather);
+    }
 }
+//bool Circuit::compareBySpeed(const Car* a, const Car* b) {
+//    return a->getAverageSpeed(weather) > b->getAverageSpeed(weather);
+//}
 
 void Circuit::Race() {
-    for (Car* car : cars) {
-        int nr_of_laps = 10;
-        while (car->fuel_capacity > 0 && nr_of_laps * length < length) {
-            double speed;
-            switch (weather) {
-                case Weather::Rain:
-                    speed = car->AVGspd.rain;
-                    break;
-                case Weather::Sunny:
-                    speed = car->AVGspd.sunny;
-                    break;
-                case Weather::Snow:
-                    speed = car->AVGspd.snow;
-                    break;
-            }
-            double travel_distance = speed; // distance covered in 1 hour
-            double fuel_needed = (travel_distance / 100) * car->fuel_consumption;
-            if (fuel_needed > car->fuel_capacity) {
-                // adjust travel_distance based on the remaining fuel
-                travel_distance = (car->fuel_capacity / car->fuel_consumption) * 100;
-            }
-            car->fuel_capacity -= fuel_needed;
-            nr_of_laps += travel_distance / length;
+    //std::sort(cars.begin(), cars.end(), compareBySpeed);
+    //std::sort(cars.begin(), cars.end(), [](Car* a, Car* b) { return a->getAverageSpeed(this->weather) < b->getAverageSpeed(); });
+
+    /*unsigned int i;
+    for (i = 0; i < nrOfCars; i++) {
+        carss[i]->GetRaceTime(circuitLength, weather);
+    }*/
+
+
+    int nrCarsNotFinished = 0;
+    for (int i = 0; i < nrOfCars; i++) {
+        if (getFinishTime(carss[i]) == 0) {
+
         }
-        // store the number of laps and whether the car finished the race
     }
+    /*cars* leaderbord[nrOfCars];
+    for()*/
 }

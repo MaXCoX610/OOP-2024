@@ -1,14 +1,20 @@
-#include "Circuit.h"
+#include "Car.h"
 
 class RangeRover : public Car {
-public:
-    RangeRover() {
-        fuel_capacity = 80.0; 
-        fuel_consumption = 11.8; 
-        AVGspd.rain = 120.0; 
-        AVGspd.sunny = 130.0; 
-        AVGspd.snow = 100.0; 
-    }
-};
+private:
+    double fuelCapacity=60;
+    double fuelConsumption=13;
 
-//this is a big ass SUV
+public:
+    RangeRover();
+
+    //~BMW() override {}
+
+    double getFuelCapacity() const override;
+    double getFuelConsumption() const override;
+    double getAverageSpeed(Weather weather) const override;
+    double calculateRange() const override;
+    //double getFinishTime() override;
+
+    void showcase() override;
+};

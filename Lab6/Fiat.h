@@ -1,14 +1,20 @@
-#include "Circuit.h"
+#include "Car.h"
 
 class Fiat : public Car {
-public:
-    Fiat() {
-        fuel_capacity = 25.0; 
-        fuel_consumption = 4.2; 
-        AVGspd.rain = 80.0; 
-        AVGspd.sunny = 100.0; 
-        AVGspd.snow = 45.0; 
-    }
-};
+private:
+    double fuelCapacity=35;
+    double fuelConsumption=4;
 
-//this is a nimble compact car a fiat 500 maybe
+public:
+    Fiat();
+
+    //~BMW() override {}
+
+    double getFuelCapacity() const override;
+    double getFuelConsumption() const override;
+    double getAverageSpeed(Weather weather) const override;
+    double calculateRange() const override;
+    //double getFinishTime() override;
+
+    void showcase() override;
+};
