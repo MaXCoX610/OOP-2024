@@ -26,8 +26,8 @@ public:
     void operator +=(const Number& otherNumber);
     void operator -=(const Number& otherNumber);
 
-    friend Number operator-(const Number& nr1, const Number& nr2);
-    friend Number operator+(const Number& nr1, const Number& nr2);
+    friend Number operator -(const Number& nr1, const Number& nr2);
+    friend Number operator +(const Number& nr1, const Number& nr2);
 
     void SwitchBase(int newBase);
     void Print();

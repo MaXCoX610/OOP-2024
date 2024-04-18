@@ -9,7 +9,7 @@ int main()
     s1.setMathGrade(9.5f);
     s1.setEnglishGrade(8.7f);
     s1.setHistoryGrade(9.3f);
-
+    
     s2.setName("Vlad");
     s2.setMathGrade(9.7f);
     s2.setEnglishGrade(8.5f);

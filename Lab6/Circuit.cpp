@@ -12,11 +12,6 @@ void Circuit::AddCar(Car *car) {
     //cars.push_back(car);
     
 }
-
-//Circuit::Circuit(unsigned int desiredCars) {
-//    carsss = new Car * [desiredCars];
-//}
-
 void Circuit::SetWeather(Weather condition) {
     weather = condition;
     
