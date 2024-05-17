@@ -312,3 +312,4 @@ public:
         {
                 return ArrayIterator<T>(List, Size);
         }
+};

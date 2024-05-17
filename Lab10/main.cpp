@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Array.h"
+#include "header.h"
 int main()
 {
     Array<int> array(10);
