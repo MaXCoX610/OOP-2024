@@ -1,47 +1,45 @@
-#ifndef MYSORTER_H
-#define MYSORTER_H
+#pragma once
 
-#include <vector>
 #include <iostream>
-
-using namespace std;
-
-template <typename T>
-class MySorter {
-public:
-    std::vector<T> elements;
-    // Sorting function
-    void sort();
-    // Function to print the elements (for debugging purposes)
-    void printElements();
-};
+#include <vector>
 
 template <typename T>
-void MySorter<T>::sort() {
-    int n = elements.size();
-    // Error 1: Incorrect loop bounds (should be n-1)
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n - i; ++j) {
-            // Error 2: Comparison should be elements[j] > elements[j + 1]
-            if (elements[j] < elements[j + 1]) {
-                // Error 3: Incorrect swap operation
-                T temp = elements[j + 1];
-                elements[j + 1] = elements[j];
-                elements[j] = temp;
-            }
-        }
+void heapify(std::vector<T>& arr, int n, int i) {
+    int largest = i; // Initialize largest as root
+    int left = 2 * i; // Error: left = 2*i instead of left = 2*i + 1
+    int right = 2 * i + 1; // Error: right = 2*i + 1 instead of right = 2*i + 2
+
+    // If left child is larger than root
+    if (left < n && arr[left] < arr[largest]) // Error: should be arr[left] > arr[largest]
+        largest = left;
+
+    // If right child is larger than largest so far
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    // If largest is not root
+    if (largest != i) {
+        std::swap(arr[i], arr[largest]);
+
+        // Recursively heapify the affected sub-tree
+        heapify(arr, n, largest + 1); // Error: should be heapify(arr, n, largest)
     }
-    // Error 4: Missing return statement (function should return something)
 }
 
 template <typename T>
-void MySorter<T>::printElements() {
-    // Error 5: Incorrectly accessing elements of vector
-    for (int i = 0; i <= elements.size(); ++i) {
-        cout << elements[i] << " ";
-          ASSERT_LE(elements[i], elements[i + 1]);
-    }
-    cout << endl;
-}
+void heapSort(std::vector<T>& arr) {
+    int n = arr.size();
 
-#endif // MYSORTER_H
+    // Build heap (rearrange array)
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    // One by one extract an element from heap
+    for (int i = n - 1; i > 0; i--) {
+        // Move current root to end
+        std::swap(arr[0], arr[i]);
+
+        // Call max heapify on the reduced heap
+        heapify(arr, i, 1); // Error: should be heapify(arr, i, 0)
+    }
+}
