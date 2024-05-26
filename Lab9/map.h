@@ -1,8 +1,11 @@
 #include <iostream>
+#include <stack>
+#include <tuple>
 
 template <typename Key, typename Value>
 class Map {
 private:
+    private:
     struct Node {
         Key key;
         Value value;
@@ -144,5 +147,55 @@ public:
     // Includes method
     bool Includes(const Map<Key, Value>& map) const {
         return includes(root, map);
+    }
+
+    // Iterator class with index tracking
+    class Iterator {
+    private:
+        Node* current;
+        std::stack<Node*> stack;
+        int index;
+
+        void pushLeft(Node* node) {
+            while (node) {
+                stack.push(node);
+                node = node->left;
+            }
+        }
+
+    public:
+        Iterator(Node* root) : current(nullptr), index(-1) {
+            pushLeft(root);
+            ++(*this);  // Move to the first element
+        }
+
+        std::tuple<Key, Value, int> operator*() const {
+            return {current->key, current->value, index};
+        }
+
+        Iterator& operator++() {
+            if (!stack.empty()) {
+                current = stack.top();
+                stack.pop();
+                pushLeft(current->right);
+                ++index;
+            } else {
+                current = nullptr;
+            }
+            return *this;
+        }
+
+        bool operator!=(const Iterator& other) const {
+            return current != other.current || !stack.empty() != !other.stack.empty();
+        }
+    };
+
+    // begin() and end() methods
+    Iterator begin() const {
+        return Iterator(root);
+    }
+
+    Iterator end() const {
+        return Iterator(nullptr);
     }
 };
