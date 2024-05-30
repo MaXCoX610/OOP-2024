@@ -37,18 +37,14 @@ class AddressBook{
     }
 
     void deleteContactByName(const string& name) {
-    auto toDelete = std::remove_if(contacts.begin(), contacts.end(), [&name](Contact* contact) {
-        return contact->name == name;
-    });
-
-    for (auto it = toDelete; it != contacts.end(); ++it) {
-        delete *it;
+        contacts.erase(remove_if(contacts.begin(), contacts.end(), [&name](Contact* contact) {
+                if (contact->name == name) {
+                    delete contact; 
+                    return true;
+                }
+                return false;
+            }), contacts.end());
     }
-
-    // Erase the marked elements from the vector
-    contacts.erase(toDelete, contacts.end());
-}
-
 
     vector<Friend*> listFriends() const {
         vector<Friend*> friends;
