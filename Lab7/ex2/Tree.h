@@ -1,106 +1,173 @@
-#include <iostream>
-#include <stdexcept>
 #pragma once
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <functional>
 #define MAXCHILDREN 100
 
 template <typename T>
 struct Node
 {
     T value;
-    Node<T> *children[MAXCHILDREN];
-    unsigned int nrChildren;
-
-    // Constructor to initialize value and nrChildren
-    Node(T value) : value(value), nrChildren(0)
+    Node<T> *children[100];
+    unsigned int nrChildren = 0;
+    Node(T value)
     {
-        for (int i = 0; i < MAXCHILDREN; ++i)
+        this->value = value;
+        for (int i = 0; i < 100; i++)
         {
             children[i] = nullptr;
         }
     }
+    //~Node() {
+    //    for (int i = 0; i < this->nrChildren; i++) {
+    //        this->children[i]->~Node();
+    //    }
+    //    this->nrChildren = 0;
+    //    //node->~Node();
+    //    delete this;
+    //}
+    Node() {}
 
-    // Default constructor
-    Node() : nrChildren(0)
+    void modifyValue(T value)
     {
-        for (int i = 0; i < MAXCHILDREN; ++i)
-        {
-            children[i] = nullptr;
-        }
+        this->value = value;
     }
 };
-
-template <typename T>
+template <class T>
 class TreeRedone
 {
-public:
+private:
     Node<T> *root;
 
-    // Default constructor initializing root to nullptr
-    TreeRedone() : root(nullptr) {}
+public:
+    /*Tree<T>() {
+        root = nullptr;
+    }*/
+    TreeRedone<T>()
+    {
+        root = nullptr;
+    }
 
-    // Method to add node to the tree (to set the root or add to a parent)
     void add_node(Node<T> *parent, T value)
     {
-        if (parent == nullptr)
+        if (parent != nullptr)
         {
-            // Setting the root if parent is nullptr
-            if (root == nullptr)
-            {
-                root = new Node<T>(value);
-            }
-            else
-            {
-                // Adding a child to the parent node
-                if (parent->nrChildren < MAXCHILDREN)
-                {
-                    parent->children[parent->nrChildren] = new Node<T>(value);
-                    parent->nrChildren++;
-                }
-                else
-                {
-                    // Handle the case where the parent has maximum children
-                    // For now, we'll assume that parent should not exceed MAXCHILDREN
-                }
-            }
+            /*if (parent->children < MAXCHILDREN) {
+
+            }*/
+            parent->children[parent->nrChildren] = new Node<T>(value);
+            parent->nrChildren++;
+        }
+        else
+        {
+            root = new Node<T>(value);
         }
     }
+
     Node<T> &get_node(Node<T> *parent)
     {
         if (parent == nullptr)
         {
-            if (root == nullptr)
-            {
-                throw std::runtime_error("The tree is empty, and no root node is available.");
-            }
+            /*int& rootRef = *parent;
+            return rootRef;*/
             return *root;
         }
         return *parent;
     }
 
-void delete_node(Node<T>* node)
-{
-    if (node == nullptr) return; // Check for null pointer
-
-    // Delete children nodes
-    for(int i = 0; i < node->nrChildren; i++) {
-        delete_node(node->children[i]);
+    void delete_node(Node<T> *node)
+    {
+        for (int i = 0; i < node->nrChildren; i++)
+        {
+            delete_node(node->children[i]);
+        }
+        node->nrChildren = 0;
+        delete node;
     }
 
-    // Delete the current node
-    delete node;
-}
-
-    void delete_tree()
+    Node<T> *find(Node<T> *node, bool (*compare)(T, T), T value)
     {
-        if (root != nullptr)
+        if (node == nullptr)
         {
-            delete_node(root);
-            root = nullptr;
+            return nullptr;
+        }
+
+        if (compare(node->value, value))
+        {
+            return node;
+        }
+
+        for (unsigned int i = 0; i < node->nrChildren; i++)
+        {
+            Node<T> *found = find(node->children[i], compare, value);
+            if (found != nullptr)
+            {
+                return found;
+            }
+        }
+        return nullptr;
+    }
+
+    Node<T> *find(bool (*compare)(T, T), T value)
+    {
+        return find(root, compare, value);
+    }
+
+    void insert(Node<T> *child, Node<T> *parent, int i)
+    {
+        if (i >= 0 && i < MAXCHILDREN && parent != nullptr)
+        {
+            if (parent->children[i] != nullptr)
+            {
+                for (int j = parent->nrChildren; j > i; --j)
+                {
+                    parent->children[j] = parent->children[j - 1];
+                }
+            }
+            parent->children[i] = child;
+            parent->nrChildren++;
         }
     }
 
-    ~TreeRedone()
-    {
-        delete_tree();
-    }
+    // void sort(const char (*metoda)(), Node<T> *node)
+    // {
+    //     char result = metoda();
+    //     if (result == '<')
+    //     {
+    //         for (int i = 0; i < node->nrChildren - 1; i++)
+    //         {
+    //             int minIndex = i;
+    //             for (int j = i + 1; j < node->nrChildren; j++)
+    //             {
+    //                 if (node->children[j]->value < node->children[minIndex]->value)
+    //                 {
+    //                     minIndex = j;
+    //                 }
+    //             }
+    //             if (minIndex != i)
+    //             {
+    //                 swap(node->children[i], node->children[minIndex]);
+    //             }
+    //         }
+    //     }
+    //     else if (result == '>')
+    //     {
+    //         for (int i = 0; i < node->nrChildren - 1; i++)
+    //         {
+    //             int maxIndex = i;
+    //             for (int j = i + 1; j < node->nrChildren; j++)
+    //             {
+    //                 if (node->children[j]->value > node->children[maxIndex]->value)
+    //                 {
+    //                     maxIndex = j;
+    //                 }
+    //             }
+    //             if (maxIndex != i)
+    //             {
+    //                 swap(node->children[i], node->children[maxIndex]);
+    //             }
+    //         }
+    //     }
+    // }
 };
