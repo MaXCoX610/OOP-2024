@@ -1,3 +1,4 @@
+#pragma once
 #include "Procesor.h"
 #include <functional>
 using namespace std;
