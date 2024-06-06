@@ -1,10 +1,8 @@
 #include "ComputeVowals.h"
 using namespace std;
 
-ComputeVowals::ComputeVowals(string name)
-{
-    this->name=name;
-}
+ComputeVowals::ComputeVowals(string name) : name(name){}
+
 
 string ComputeVowals::GetName()
 {
@@ -12,14 +10,11 @@ string ComputeVowals::GetName()
 }
 
 int ComputeVowals::Compute(string s){
-    string vocale ="aeiouAEIOU";
-    int nrVocale=0;
-    size_t pozitie;
-    pozitie=s.find_first_of(vocale);
-
-    while(pozitie != string::npos){
-        nrVocale++;
-        pozitie=s.find_first_of(vocale,pozitie+1);
+    int k=0;
+    for(int i=0; i<=s.length(); i++)
+    {
+        if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u' || s[i]=='A' || s[i]=='E' || s[i]=='I' || s[i]=='O' || s[i]=='U')
+            k++;
     }
-    return nrVocale;
+    return k;
 }

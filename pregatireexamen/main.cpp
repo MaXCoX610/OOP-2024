@@ -9,12 +9,12 @@ using namespace std;
 int main()
 {
     ComputeVowals procesorVowals("Voc");
-    //cout<<
-    CountLetter procesorCount("countE", [](char ch){ return ch=='e';});
-    cout<<procesorCount.Compute("Second POO test")<<endl;
+    cout<< procesorVowals.Compute("mata coaie");
+    // CountLetter procesorCount("countE", [](char ch){ return ch=='e';});
+    // cout<<procesorCount.Compute("Second POO test")<<endl;
 
-    LongestWord procesorLongestWord("long");
-    cout<<procesorLongestWord.Compute("Se POO test")<<endl;
+    // LongestWord procesorLongestWord("long");
+    // cout<<procesorLongestWord.Compute("Se POO test")<<endl;
 
     // Sentence s("Second POO test");
     // (s += new ComputeVowals("Voc")) += new CountLetter("CountE", [](char ch) { return ch == 'e'; });

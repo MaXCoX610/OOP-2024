@@ -17,7 +17,6 @@ private:
     
     Node* root;
 
-    // Private helper functions
     Value& findOrCreate(Node*& node, const Key& key) {
         if (node == nullptr) {
             node = new Node(key, Value());
