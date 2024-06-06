@@ -6,13 +6,19 @@
 
 int main()
 {
+    /*Book carte(100, 3, "Dune", "Frank Herbert");
+    Apple mar(12, 15, "Germany");
+    VideoGame joc(10, 2, "Nintendo", "Super Mario");
+    carte.Print();
+    mar.Print();
+    joc.Print();*/
     Shop s;
     s.Add(new Book(100, 3, "Dune", "Frank Herbert")).Add(new Apple(20, 100, "Romania"));
     s.Add(new VideoGame(10, 2, "Nintendo", "Super Mario"));
     s.Add(new Apple(12, 15, "Germany"));
-    std::cout << "Total price   : " << s.GetTotalPrice() << std::endl;
-    std::cout << "Apple quantity: " << s.GetQuantity("Apple") << std::endl;
-    std::cout << "Items" << std::endl;
+    cout << "Total price   : " << s.GetTotalPrice() << endl;
+    cout << "Apple quantity: " << s.GetQuantity("Apple") << endl;
+    cout << "Items" << endl;
     s.List();
     return 0;
 }

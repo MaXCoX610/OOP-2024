@@ -1,11 +1,12 @@
+#pragma once
 #include<iostream>
 #include<string>
 using namespace std;
 
 class Article{
     public:
-    virtual string GetType();
-    virtual int GetQuantity();
-    virtual int GetPrice();
-    virtual void Print();
+    virtual string GetType() =0;
+    virtual int GetQuantity() =0;
+    virtual int GetPrice() =0;
+    virtual void Print() =0;
 };
