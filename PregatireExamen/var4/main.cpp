@@ -9,9 +9,9 @@ int main() {
     (d += e1) += (new StringData("Facultate", "FII"));
     (d += e2) += (new IntegerData("NotaPOO", "9"));
     d.Print();
-    /*for (Entry* e : d) {
-        e->Substract(5);
-    }*/
+    for (Entry* e : d) {
+        //e->Substract(5);
+    }
     d.Print();
     //d -= "NotaEngleza";
     d.Print();
