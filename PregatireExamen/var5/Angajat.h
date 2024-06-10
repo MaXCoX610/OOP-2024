@@ -17,4 +17,5 @@ public:
 	bool SetSalariu(int salariu);
 	virtual void Lucreaza()=0;
 	Angajat(string nume, int salariu, int id);
+	friend class Manager;
 };

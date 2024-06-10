@@ -33,12 +33,13 @@ bool Manager::Concediaza(Angajat* x)
 	return false;
 }
 
-//Angajat Manager::GetAngajat(int id)
-//{
-//	for(int i=0; i<=echipa.size(); i++)
-//		if(echipa[i].id==id)
-//			return *this;
-//}
+Angajat* Manager::GetAngajat(int id)
+{
+	for(auto it: echipa)
+		if(it->id==id)
+			return it;
+	return nullptr;
+}
 
 Manager::Manager(string numeEchipa, string nume, int salariu, int id): Angajat(nume,salariu,id)
 {
